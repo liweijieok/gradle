@@ -270,7 +270,7 @@ dependencies {
     def "skips test tasks when no source is available for Swift executable"() {
         given:
         buildFile << """
-apply plugin: 'swift-executable'
+apply plugin: 'swift-application'
 """
 
         when:
@@ -286,7 +286,7 @@ apply plugin: 'swift-executable'
         def app = new SwiftAppWithXCTest()
         settingsFile << "rootProject.name = '${app.projectName}'"
         buildFile << """
-apply plugin: 'swift-executable'
+apply plugin: 'swift-application'
 """
         app.writeToProject(testDirectory)
 
@@ -304,7 +304,7 @@ apply plugin: 'swift-executable'
         def test = new SwiftAppTest(main, main.greeter, main.sum, main.multiply)
         settingsFile << "rootProject.name = '${main.projectName}'"
         buildFile << """
-apply plugin: 'swift-executable'
+apply plugin: 'swift-application'
 """
         main.writeToProject(testDirectory)
         test.writeToProject(testDirectory)
@@ -323,7 +323,7 @@ apply plugin: 'swift-executable'
         def app = new SwiftAppWithSingleXCTestSuite()
         settingsFile << "rootProject.name = '${app.projectName}'"
         buildFile << """
-apply plugin: 'swift-executable'
+apply plugin: 'swift-application'
 """
         app.writeToProject(testDirectory)
 
@@ -491,7 +491,7 @@ apply plugin: 'swift-library'
             include 'hello', 'log'
         """
         buildFile << """
-            apply plugin: 'swift-executable'
+            apply plugin: 'swift-application'
             dependencies {
                 implementation project(':hello')
             }
@@ -537,7 +537,7 @@ apply plugin: 'swift-library'
             include 'hello', 'log'
         """
         buildFile << """
-            apply plugin: 'swift-executable'
+            apply plugin: 'swift-application'
             executable {
                 source.from rootProject.file('Sources/App')
             }

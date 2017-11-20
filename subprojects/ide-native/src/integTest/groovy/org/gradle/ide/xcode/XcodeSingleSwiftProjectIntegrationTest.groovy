@@ -31,7 +31,7 @@ class XcodeSingleSwiftProjectIntegrationTest extends AbstractXcodeIntegrationSpe
     def "can create xcode project for Swift executable"() {
         given:
         buildFile << """
-apply plugin: 'swift-executable'
+apply plugin: 'swift-application'
 """
 
         def app = new SwiftApp()
@@ -92,7 +92,7 @@ apply plugin: 'swift-library'
     def "can create xcode project for Swift executable with xctest"() {
         given:
         buildFile << """
-apply plugin: 'swift-executable'
+apply plugin: 'swift-application'
 apply plugin: 'xctest'
 """
 
@@ -162,7 +162,7 @@ apply plugin: 'xctest'
 
         given:
         buildFile << """
-apply plugin: 'swift-executable'
+apply plugin: 'swift-application'
 """
 
         def lib = new SwiftLib()
@@ -309,7 +309,7 @@ apply plugin: 'xctest'
 rootProject.name = 'app'
 """
         buildFile << """
-apply plugin: 'swift-executable'
+apply plugin: 'swift-application'
 apply plugin: 'xctest'
 """
 
@@ -337,7 +337,7 @@ apply plugin: 'xctest'
 
         given:
         buildFile << """
-apply plugin: 'swift-executable'
+apply plugin: 'swift-application'
 """
 
         app.writeToProject(testDirectory)
@@ -376,7 +376,7 @@ apply plugin: 'swift-executable'
 
         given:
         buildFile << """
-apply plugin: 'swift-executable'
+apply plugin: 'swift-application'
 """
 
         app.writeToProject(testDirectory)
@@ -399,7 +399,7 @@ apply plugin: 'swift-executable'
 
         given:
         buildFile << """
-apply plugin: 'swift-executable'
+apply plugin: 'swift-application'
 """
 
         app.writeToProject(testDirectory)
@@ -465,7 +465,7 @@ apply plugin: 'swift-library'
     def "adds new source files in the project"() {
         given:
         buildFile << """
-apply plugin: 'swift-executable'
+apply plugin: 'swift-application'
 """
 
         when:
@@ -488,7 +488,7 @@ apply plugin: 'swift-executable'
     def "removes deleted source files from the project"() {
         given:
         buildFile << """
-apply plugin: 'swift-executable'
+apply plugin: 'swift-application'
 """
 
         when:
@@ -512,7 +512,7 @@ apply plugin: 'swift-executable'
     def "includes source files in a non-default location in Swift executable project"() {
         given:
         buildFile << """
-apply plugin: 'swift-executable'
+apply plugin: 'swift-application'
 
 executable {
     source.from 'Sources'
@@ -552,7 +552,7 @@ library {
     def "honors changes to executable output file locations"() {
         given:
         buildFile << """
-apply plugin: 'swift-executable'
+apply plugin: 'swift-application'
 buildDir = 'output'
 executable.module = 'TestApp'
 """

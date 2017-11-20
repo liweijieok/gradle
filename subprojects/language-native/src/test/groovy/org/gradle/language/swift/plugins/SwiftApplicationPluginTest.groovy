@@ -26,7 +26,7 @@ import org.gradle.testfixtures.ProjectBuilder
 import org.junit.Rule
 import spock.lang.Specification
 
-class SwiftExecutablePluginTest extends Specification {
+class SwiftApplicationPluginTest extends Specification {
     @Rule
     TestNameTestDirectoryProvider tmpDir = new TestNameTestDirectoryProvider()
     def projectDir = tmpDir.createDir("project")
@@ -37,7 +37,7 @@ class SwiftExecutablePluginTest extends Specification {
         def src = projectDir.file("src/main/swift/main.swift").createFile()
 
         when:
-        project.pluginManager.apply(SwiftExecutablePlugin)
+        project.pluginManager.apply(SwiftApplicationPlugin)
 
         then:
         project.executable instanceof SwiftApplication
@@ -47,7 +47,7 @@ class SwiftExecutablePluginTest extends Specification {
 
     def "registers a component for the executable"() {
         when:
-        project.pluginManager.apply(SwiftExecutablePlugin)
+        project.pluginManager.apply(SwiftApplicationPlugin)
 
         then:
         project.components.main == project.executable
@@ -60,7 +60,7 @@ class SwiftExecutablePluginTest extends Specification {
         def src = projectDir.file("src/main/swift/main.swift").createFile()
 
         when:
-        project.pluginManager.apply(SwiftExecutablePlugin)
+        project.pluginManager.apply(SwiftApplicationPlugin)
 
         then:
         def compileDebug = project.tasks.compileDebugSwift
@@ -102,7 +102,7 @@ class SwiftExecutablePluginTest extends Specification {
 
     def "output file names are calculated from module name defined on extension"() {
         when:
-        project.pluginManager.apply(SwiftExecutablePlugin)
+        project.pluginManager.apply(SwiftApplicationPlugin)
         project.executable.module = "App"
 
         then:

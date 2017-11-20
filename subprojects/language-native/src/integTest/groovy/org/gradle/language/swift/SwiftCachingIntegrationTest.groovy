@@ -36,7 +36,7 @@ class SwiftCachingIntegrationTest extends AbstractInstalledToolChainIntegrationS
         '''
         project.file('settings.gradle') << localCacheConfiguration()
         project.file('build.gradle').text = '''
-            apply plugin: 'swift-executable'
+            apply plugin: 'swift-application'
             dependencies {
                 implementation project(':hello')
             }

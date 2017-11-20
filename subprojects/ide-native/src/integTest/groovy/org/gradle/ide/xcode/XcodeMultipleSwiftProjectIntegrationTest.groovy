@@ -41,7 +41,7 @@ class XcodeMultipleSwiftProjectIntegrationTest extends AbstractXcodeIntegrationS
         given:
         buildFile << """
             project(':app') {
-                apply plugin: 'swift-executable'
+                apply plugin: 'swift-application'
                 dependencies {
                     implementation project(':greeter')
                 }
@@ -100,7 +100,7 @@ class XcodeMultipleSwiftProjectIntegrationTest extends AbstractXcodeIntegrationS
         """
         buildFile << """
             project(':app') {
-                apply plugin: 'swift-executable'
+                apply plugin: 'swift-application'
                 dependencies {
                     implementation project(':hello')
                 }
@@ -168,7 +168,7 @@ class XcodeMultipleSwiftProjectIntegrationTest extends AbstractXcodeIntegrationS
         """
         buildFile << """
             project(':app') {
-                apply plugin: 'swift-executable'
+                apply plugin: 'swift-application'
                 dependencies {
                     implementation project(':hello')
                 }
@@ -229,7 +229,7 @@ class XcodeMultipleSwiftProjectIntegrationTest extends AbstractXcodeIntegrationS
             rootProject.name = '${rootProjectName}'
         """
         buildFile << """
-            apply plugin: 'swift-executable'
+            apply plugin: 'swift-application'
             apply plugin: 'xcode'
 
             dependencies {
@@ -286,7 +286,7 @@ class XcodeMultipleSwiftProjectIntegrationTest extends AbstractXcodeIntegrationS
         given:
         buildFile << """
             project(':app') {
-                apply plugin: 'swift-executable'
+                apply plugin: 'swift-application'
                 dependencies {
                     implementation project(':greeter')
                 }

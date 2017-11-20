@@ -17,7 +17,7 @@
 package org.gradle.nativeplatform.test.xctest.plugins
 
 import org.gradle.internal.os.OperatingSystem
-import org.gradle.language.swift.plugins.SwiftExecutablePlugin
+import org.gradle.language.swift.plugins.SwiftApplicationPlugin
 import org.gradle.language.swift.plugins.SwiftLibraryPlugin
 import org.gradle.language.swift.tasks.SwiftCompile
 import org.gradle.nativeplatform.tasks.InstallExecutable
@@ -74,7 +74,7 @@ class XCTestConventionPluginTest extends Specification {
         project.xctest.testedComponent.orNull == null
 
         when:
-        project.pluginManager.apply(SwiftExecutablePlugin)
+        project.pluginManager.apply(SwiftApplicationPlugin)
 
         then:
         project.xctest.testedComponent.orNull == project.executable
