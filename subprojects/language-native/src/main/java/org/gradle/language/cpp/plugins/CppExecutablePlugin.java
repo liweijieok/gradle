@@ -41,6 +41,7 @@ import org.gradle.language.cpp.internal.NativeVariant;
 import javax.inject.Inject;
 
 import static org.gradle.language.cpp.CppBinary.DEBUGGABLE_ATTRIBUTE;
+import static org.gradle.language.cpp.CppBinary.OPTIMIZED_ATTRIBUTE;
 
 /**
  * <p>A plugin that produces a native executable from C++ source.</p>
@@ -94,6 +95,7 @@ public class CppExecutablePlugin implements Plugin<ProjectInternal> {
         debugRuntimeElements.setCanBeResolved(false);
         debugRuntimeElements.getAttributes().attribute(Usage.USAGE_ATTRIBUTE, runtimeUsage);
         debugRuntimeElements.getAttributes().attribute(DEBUGGABLE_ATTRIBUTE, true);
+        debugRuntimeElements.getAttributes().attribute(OPTIMIZED_ATTRIBUTE, false);
         debugRuntimeElements.getOutgoing().artifact(application.getDebugExecutable().getExecutableFile());
 
         final Configuration releaseRuntimeElements = configurations.maybeCreate("releaseRuntimeElements");
@@ -101,6 +103,7 @@ public class CppExecutablePlugin implements Plugin<ProjectInternal> {
         releaseRuntimeElements.setCanBeResolved(false);
         releaseRuntimeElements.getAttributes().attribute(Usage.USAGE_ATTRIBUTE, runtimeUsage);
         releaseRuntimeElements.getAttributes().attribute(DEBUGGABLE_ATTRIBUTE, false);
+        releaseRuntimeElements.getAttributes().attribute(OPTIMIZED_ATTRIBUTE, true);
         releaseRuntimeElements.getOutgoing().artifact(application.getReleaseExecutable().getExecutableFile());
 
         final MainExecutableVariant mainVariant = new MainExecutableVariant();
