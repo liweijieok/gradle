@@ -95,7 +95,7 @@ class SwiftDependenciesIntegrationTest extends AbstractInstalledToolChainIntegra
     }
 
     private writeApp() {
-        app.executable.writeToProject(file("app"))
+        app.application.writeToProject(file("app"))
         file("app/build.gradle") << """
             apply plugin: 'swift-application'
             group = 'org.gradle.swift'

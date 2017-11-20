@@ -52,7 +52,7 @@ class XCTestConventionPluginTest extends Specification {
         project.xctest.swiftSource.files == [src] as Set
     }
 
-    def "sets tested component to main component when applying swift library plugin"() {
+    def "sets tested component to main component when applying Swift library plugin"() {
         when:
         project.pluginManager.apply(XCTestConventionPlugin)
 
@@ -66,7 +66,7 @@ class XCTestConventionPluginTest extends Specification {
         project.xctest.testedComponent.orNull == project.library
     }
 
-    def "sets tested component to swift executable when applying swift executable plugin"() {
+    def "sets tested component to Swift application when applying swift application plugin"() {
         when:
         project.pluginManager.apply(XCTestConventionPlugin)
 

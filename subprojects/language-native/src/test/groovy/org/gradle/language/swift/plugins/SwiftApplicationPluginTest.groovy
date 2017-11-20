@@ -40,9 +40,9 @@ class SwiftApplicationPluginTest extends Specification {
         project.pluginManager.apply(SwiftApplicationPlugin)
 
         then:
-        project.executable instanceof SwiftApplication
-        project.executable.module.get() == "TestApp"
-        project.executable.swiftSource.files == [src] as Set
+        project.application instanceof SwiftApplication
+        project.application.module.get() == "TestApp"
+        project.application.swiftSource.files == [src] as Set
     }
 
     def "registers a component for the executable"() {
@@ -50,9 +50,9 @@ class SwiftApplicationPluginTest extends Specification {
         project.pluginManager.apply(SwiftApplicationPlugin)
 
         then:
-        project.components.main == project.executable
-        project.components.mainDebug == project.executable.debugExecutable
-        project.components.mainRelease == project.executable.releaseExecutable
+        project.components.main == project.application
+        project.components.mainDebug == project.application.debugExecutable
+        project.components.mainRelease == project.application.releaseExecutable
     }
 
     def "adds compile, link and install tasks"() {
@@ -103,7 +103,7 @@ class SwiftApplicationPluginTest extends Specification {
     def "output file names are calculated from module name defined on extension"() {
         when:
         project.pluginManager.apply(SwiftApplicationPlugin)
-        project.executable.module = "App"
+        project.application.module = "App"
 
         then:
         def compileSwift = project.tasks.compileDebugSwift

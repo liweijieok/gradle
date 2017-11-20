@@ -267,7 +267,7 @@ dependencies {
         result.assertTasksSkipped(":compileDebugSwift", ":compileTestSwift", ":linkTest", ":installTest", ":xcTest", ":test")
     }
 
-    def "skips test tasks when no source is available for Swift executable"() {
+    def "skips test tasks when no source is available for Swift application"() {
         given:
         buildFile << """
 apply plugin: 'swift-application'
@@ -281,7 +281,7 @@ apply plugin: 'swift-application'
         result.assertTasksSkipped(":compileDebugSwift", ":compileTestSwift", ":relocateMainForTest", ":linkTest", ":installTest", ":xcTest", ":test")
     }
 
-    def "can test public and internal features of a Swift executable"() {
+    def "can test public and internal features of a Swift application"() {
         given:
         def app = new SwiftAppWithXCTest()
         settingsFile << "rootProject.name = '${app.projectName}'"
@@ -298,7 +298,7 @@ apply plugin: 'swift-application'
         app.assertTestCasesRan(testExecutionResult)
     }
 
-    def "can test public and internal features of a Swift executable with a single source file"() {
+    def "can test public and internal features of a Swift application with a single source file"() {
         given:
         def main = new SwiftSingleFileApp()
         def test = new SwiftAppTest(main, main.greeter, main.sum, main.multiply)
@@ -318,7 +318,7 @@ apply plugin: 'swift-application'
         test.assertTestCasesRan(testExecutionResult)
     }
 
-    def "can test features of a Swift executable using a single test source file"() {
+    def "can test features of a Swift application using a single test source file"() {
         given:
         def app = new SwiftAppWithSingleXCTestSuite()
         settingsFile << "rootProject.name = '${app.projectName}'"
@@ -506,7 +506,7 @@ apply plugin: 'swift-library'
             }
         """
 
-        app.executable.writeToProject(testDirectory)
+        app.application.writeToProject(testDirectory)
         app.greeter.writeToProject(file('hello'))
         app.logger.writeToProject(file('log'))
 
@@ -538,7 +538,7 @@ apply plugin: 'swift-library'
         """
         buildFile << """
             apply plugin: 'swift-application'
-            executable {
+            application {
                 source.from rootProject.file('Sources/App')
             }
             xctest {
@@ -565,7 +565,7 @@ apply plugin: 'swift-library'
             }
         """
 
-        app.executable.writeToProject(file('Sources/App'))
+        app.application.writeToProject(file('Sources/App'))
         app.greeter.writeToProject(file('Sources/Hello'))
         app.logger.writeToProject(file('Sources/Log'))
 

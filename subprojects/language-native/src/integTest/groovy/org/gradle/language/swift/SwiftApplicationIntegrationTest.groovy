@@ -28,7 +28,7 @@ import org.gradle.util.TestPrecondition
 import static org.gradle.util.Matchers.containsText
 
 @Requires(TestPrecondition.SWIFT_SUPPORT)
-class SwiftExecutableIntegrationTest extends AbstractInstalledToolChainIntegrationSpec {
+class SwiftApplicationIntegrationTest extends AbstractInstalledToolChainIntegrationSpec {
     def "skip compile, link and install tasks when no source"() {
         given:
         buildFile << """
@@ -191,7 +191,7 @@ class SwiftExecutableIntegrationTest extends AbstractInstalledToolChainIntegrati
             apply plugin: 'swift-application'
 
             task buildDebug {
-                dependsOn executable.debugExecutable.executableFile
+                dependsOn application.debugExecutable.executableFile
             }
          """
 
@@ -212,7 +212,7 @@ class SwiftExecutableIntegrationTest extends AbstractInstalledToolChainIntegrati
             apply plugin: 'swift-application'
 
             task compileDebug {
-                dependsOn executable.debugExecutable.objects
+                dependsOn application.debugExecutable.objects
             }
          """
 
@@ -234,7 +234,7 @@ class SwiftExecutableIntegrationTest extends AbstractInstalledToolChainIntegrati
             apply plugin: 'swift-application'
 
             task install {
-                dependsOn executable.debugExecutable.installDirectory
+                dependsOn application.debugExecutable.installDirectory
             }
          """
 
@@ -280,7 +280,7 @@ class SwiftExecutableIntegrationTest extends AbstractInstalledToolChainIntegrati
         and:
         buildFile << """
             apply plugin: 'swift-application'
-            executable {
+            application {
                 source.from 'Sources'
             }
          """
@@ -308,7 +308,7 @@ class SwiftExecutableIntegrationTest extends AbstractInstalledToolChainIntegrati
         and:
         buildFile << """
             apply plugin: 'swift-application'
-            executable {
+            application {
                 source {
                     from('src/main.swift')
                     from('src/one.swift')
@@ -358,7 +358,7 @@ class SwiftExecutableIntegrationTest extends AbstractInstalledToolChainIntegrati
         and:
         buildFile << """
             apply plugin: 'swift-application'
-            executable.module = 'TestApp'
+            application.module = 'TestApp'
          """
 
         expect:
@@ -448,7 +448,7 @@ class SwiftExecutableIntegrationTest extends AbstractInstalledToolChainIntegrati
 """
         app.library.writeToProject(file("hello"))
         app.logLibrary.writeToProject(file("log"))
-        app.executable.writeToProject(file("app"))
+        app.application.writeToProject(file("app"))
 
         expect:
         succeeds ":app:assemble"
@@ -492,7 +492,7 @@ class SwiftExecutableIntegrationTest extends AbstractInstalledToolChainIntegrati
             }
 """
         app.library.writeToProject(file("hello"))
-        app.executable.writeToProject(file("app"))
+        app.application.writeToProject(file("app"))
 
         expect:
         succeeds ":app:linkRelease"
@@ -535,7 +535,7 @@ class SwiftExecutableIntegrationTest extends AbstractInstalledToolChainIntegrati
 """
         app.library.writeToProject(file("hello"))
         app.logLibrary.writeToProject(file("log"))
-        app.executable.writeToProject(file("app"))
+        app.application.writeToProject(file("app"))
 
         expect:
         succeeds ":app:assemble"
@@ -561,7 +561,7 @@ class SwiftExecutableIntegrationTest extends AbstractInstalledToolChainIntegrati
                 dependencies {
                     implementation project(':hello')
                 }
-                executable {
+                application {
                     source.from '../Sources/${app.main.sourceFile.name}'
                 }
             }
@@ -583,7 +583,7 @@ class SwiftExecutableIntegrationTest extends AbstractInstalledToolChainIntegrati
 """
         app.library.writeToSourceDir(file("Sources"))
         app.logLibrary.writeToSourceDir(file("Sources"))
-        app.executable.writeToSourceDir(file("Sources"))
+        app.application.writeToSourceDir(file("Sources"))
 
         expect:
         succeeds ":app:assemble"
@@ -628,7 +628,7 @@ class SwiftExecutableIntegrationTest extends AbstractInstalledToolChainIntegrati
 
         app.library.writeToProject(file("hello"))
         app.logLibrary.writeToProject(file("log"))
-        app.executable.writeToProject(testDirectory)
+        app.application.writeToProject(testDirectory)
 
         expect:
         succeeds ":assemble"
