@@ -343,7 +343,6 @@ apply plugin: 'swift-executable'
 """
 
         app.writeToProject(testDirectory)
-        //executer.startLauncherInDebugger(true)
         succeeds("xcode")
 
         when:
